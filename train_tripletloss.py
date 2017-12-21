@@ -235,7 +235,7 @@ def train(args, sess, dataset, epoch, image_paths_placeholder, labels_placeholde
         while i < nrof_batches:
             start_time = time.time()
             batch_size = min(nrof_examples - i * args.batch_size, args.batch_size)
-            feed_dict = {batch_size_placeholder: batch_size, learning_rate_placeholder: lr}
+            feed_dict = {batch_size_placeholder: batch_size, learning_rate_placeholder: lr, phase_train_placeholder: True}
             err, _, step, emb, lab = sess.run([loss, train_op, global_step, embeddings, labels_batch],
                                               feed_dict=feed_dict)
             emb_array[lab, :] = emb
