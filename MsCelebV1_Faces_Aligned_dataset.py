@@ -1,8 +1,11 @@
 import base64
+import os
 
-import numpy as np
-from scipy import misc
 import cv2
+import numpy as np
+
+import config
+
 
 # ----- MsCelebV1-Faces-Aligned.tsv -----
 # File format: text files, each line is an image record containing 7 columns, delimited by TAB.
@@ -39,7 +42,9 @@ def read_images(filepath, volume=1000000):
     # volumn: how many data can be read each time.
     # count = 0  # only for debug
     start_index = 0
-    image_records = list()
+    # image_records = list()
+    if not os.path.exists(config.dataset_path):
+        os.mkdir(config.dataset_path)
     with open(filepath, 'r') as fr:
         # first part of file
         fr.seek(start_index)
@@ -48,8 +53,26 @@ def read_images(filepath, volume=1000000):
         while buffer != None:
             # get image records
             buffer, part_of_image_records = get_image_record(buffer)
-            image_records += part_of_image_records
+            # image_records += part_of_image_records  # read all image records to memory
             # count += len(part_of_image_records)
+
+            # save image
+            try:
+                for record_no in range(len(part_of_image_records)):
+                    # Freebase MID as people name
+                    people_name = part_of_image_records[record_no][0]
+                    if not os.path.exists(os.path.join(config.dataset_path, people_name)):
+                        os.mkdir(os.path.join(config.dataset_path, people_name))
+                    # ImageSearchRank as image filename
+                    image_filename = '%s.png' % part_of_image_records[record_no][1]
+                    # change format to image
+                    base64_decode = base64.b64decode(part_of_image_records[record_no][6])
+                    img_data = np.fromstring(base64_decode, dtype=np.uint8)
+                    img = cv2.imdecode(img_data, cv2.IMREAD_COLOR)
+                    print(os.path.join(os.path.join(config.dataset_path, people_name), image_filename))
+                    cv2.imwrite(os.path.join(os.path.join(config.dataset_path, people_name), image_filename), img)
+            except:
+                None
 
             # next part of file
             fr.seek(start_index)
@@ -60,10 +83,6 @@ def read_images(filepath, volume=1000000):
             # done_count = 1000
             # if count % done_count == 0 and count != 0:
             #     print('%d images done' % done_count)
-            #     # change format to image
-            #     base64_decode = base64.b64decode(image_records[-1][6])
-            #     img_data = np.fromstring(base64_decode, dtype=np.uint8)
-            #     img = cv2.imdecode(img_data, cv2.IMREAD_COLOR)
             #     cv2.imshow('image', img)
             #     cv2.waitKey()
 

@@ -31,6 +31,7 @@ import os
 import numpy as np
 import facenet
 
+
 def evaluate(embeddings, actual_issame, nrof_folds=10):
     # Calculate evaluation metrics
     thresholds = np.arange(0, 4, 0.01)
@@ -42,6 +43,7 @@ def evaluate(embeddings, actual_issame, nrof_folds=10):
     val, val_std, far = facenet.calculate_val(thresholds, embeddings1, embeddings2,
         np.asarray(actual_issame), 1e-3, nrof_folds=nrof_folds)
     return tpr, fpr, accuracy, val, val_std, far
+
 
 def get_paths(lfw_dir, pairs, file_ext):
     nrof_skipped_pairs = 0
@@ -66,6 +68,7 @@ def get_paths(lfw_dir, pairs, file_ext):
     
     return path_list, issame_list
 
+
 def read_pairs(pairs_filename):
     pairs = []
     with open(pairs_filename, 'r') as f:
@@ -73,6 +76,3 @@ def read_pairs(pairs_filename):
             pair = line.strip().split()
             pairs.append(pair)
     return np.array(pairs)
-
-
-
