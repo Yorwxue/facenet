@@ -87,4 +87,4 @@ def read_images(filepath, volume=1000000):
             #     cv2.waitKey()
 
 if __name__ == '__main__':
-    read_images('/media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/MscelebV1/MscelebV1-Faces-Aligned/MsCelebV1-Faces-Aligned.tsv')
+    read_images(os.path.expanduser('~/facenet/dataset/MscelebV1/MsCelebV1-Faces-Aligned.tsv'))
