@@ -87,4 +87,4 @@ def read_images(filepath, volume=1000000):
             #     cv2.waitKey()
 
 if __name__ == '__main__':
-    read_images(os.path.expanduser('/workspace/dataset/MscelebV1/MsCelebV1-Faces-Aligned.tsv'))
+    read_images(os.path.expanduser('/workspace/dataset/MsCelebV1/MsCelebV1-Faces-Aligned.tsv'))
