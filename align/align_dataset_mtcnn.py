@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 # Note
-# export PYTHONPATH=/media/clliao/006a3168-df49-4b0a-a874-891877a88870/clliao/workspace/python/facenet
+# export PYTHONPATH=/media/clliao/006a3168-df49-4b0a-a874-891877a88870/clliao/workspace/python/pre_trained
 
 # 1. align
 # for N in {1..4}; do python3.6 align/align_dataset_mtcnn.py {raw images directory} {output directory} --image_size 160 --margin 32 --random_order --gpu_memory_fraction 0.25 & done
