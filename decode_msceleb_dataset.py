@@ -53,7 +53,7 @@ def main(args):
   
     # Store some git revision info in a text file in the output directory
     # src_path,_ = os.path.split(os.path.realpath(__file__))
-    # facenet.store_revision_info(src_path, output_dir, ' '.join(sys.argv))
+    # pre_trained.store_revision_info(src_path, output_dir, ' '.join(sys.argv))
     
     i = 0
     for f in args.tsv_files:

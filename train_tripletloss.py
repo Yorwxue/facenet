@@ -25,6 +25,7 @@ import facenet
 import lfw
 
 from tensorflow.python.ops import data_flow_ops
+slim = tf.contrib.slim
 
 
 def main(args):
@@ -110,9 +111,10 @@ def main(args):
             batch_norm_epsilon=0.001,
             activation_fn=tf.nn.relu
         )
-        prelogits, _ = network.inception_resnet_v2(
-            image_batch, is_training=phase_train_placeholder, dropout_keep_prob=args.keep_probability,
-            num_classes=args.embedding_size, reuse=None)
+        with slim.arg_scope(scope):
+            prelogits, _ = network.inception_resnet_v2(
+                image_batch, is_training=phase_train_placeholder, dropout_keep_prob=args.keep_probability,
+                num_classes=args.embedding_size, reuse=None)
 
         embeddings = tf.nn.l2_normalize(prelogits, 1, 1e-10, name='embeddings')
 
@@ -397,13 +399,13 @@ def parse_arguments(argv):
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--logs_base_dir', type=str,
-                        help='Directory where to write event logs.', default='~/logs/facenet')
+                        help='Directory where to write event logs.', default='~/logs/pre_trained')
     parser.add_argument('--models_base_dir', type=str,
-                        help='Directory where to write trained models and checkpoints.', default='~/models/facenet')
+                        help='Directory where to write trained models and checkpoints.', default='~/models/pre_trained')
     parser.add_argument('--gpu_memory_fraction', type=float,
                         help='Upper bound on the amount of GPU memory that will be used by the process.', default=1.0)
     parser.add_argument('--pretrained_model', type=str,
-                        help='Load a pretrained model before training starts.', default='~/models/facenet/20170512-110547.pb')
+                        help='Load a pretrained model before training starts.', default='~/models/pre_trained/20170512-110547.pb')
     parser.add_argument('--data_dir', type=str,
                         help='Path to the data directory containing aligned face patches. Multiple directories are separated with colon.',
                         default='~/datasets/face_recognition_dataset/lfw_mtcnnpy_160')
