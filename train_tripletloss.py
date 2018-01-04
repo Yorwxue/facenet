@@ -405,7 +405,7 @@ def parse_arguments(argv):
     parser.add_argument('--models_base_dir', type=str,
                         help='Directory where to write trained models and checkpoints.', default='./models/pre_trained')
     parser.add_argument('--gpu_memory_fraction', type=float,
-                        help='Upper bound on the amount of GPU memory that will be used by the process.', default=0.8)
+                        help='Upper bound on the amount of GPU memory that will be used by the process.', default=1)
     parser.add_argument('--pretrained_model', type=str,
                         help='Load a pretrained model before training starts.')
     parser.add_argument('--data_dir', type=str,
@@ -473,7 +473,7 @@ def parse_arguments(argv):
     # Setting of performance
     parser.add_argument('--num_of_threads', type=int,
                         help='Depend on performance of computer.',
-                        default=4)
+                        default=1)
     return parser.parse_args(argv)
 
 
