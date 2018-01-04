@@ -3,14 +3,25 @@
 # export PYTHONPATH=<path/to/your/facenet.py>
 # python dataset_read_speed.py <path/to/your/dataset>
 
-import facenet
 import argparse
 import sys
 import time
 import numpy as np
 from scipy import misc
+from datetime import datetime
+import os
+
+import facenet
+
 
 def main(args):
+    subdir = datetime.strftime(datetime.now(), '%Y%m%d-%H%M%S')
+    log_dir = os.path.expanduser(args.logs_base_dir)
+    print('log dir: %s' % log_dir)
+    log_file = os.path.join(log_dir, subdir)
+    if not os.path.isdir(log_dir):  # Create the log directory if it doesn't exist
+        os.makedirs(log_dir)
+
     dataset = facenet.get_dataset(args.dir)
     paths, _ = facenet.get_image_paths_and_labels(dataset)
     t = np.zeros((len(paths)))
@@ -20,9 +31,12 @@ def main(args):
         # with open(path, mode='rb') as f:
         #     _ = f.read()
         try:
-            img = misc.imread(path)
+            misc.imread(path)
         except:
             print(path)
+            with open(log_file, 'a') as fw:
+                    fw.write('%s\n' % path)
+
         duration = time.time() - start_time
         t[i] = duration
         if i % 1000 == 0 or i == len(paths)-1:
@@ -31,6 +45,8 @@ def main(args):
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
+    parser.add_argument(('--logs_base_dir'), type=str,
+                        default='../logs/dataset')
     parser.add_argument('dir', type=str,
         help='Directory with dataset to test')
     return parser.parse_args(argv)
