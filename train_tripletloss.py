@@ -424,7 +424,7 @@ def parse_arguments(argv):
     parser.add_argument('--images_per_person', type=int,
                         help='Number of images per person.', default=40)
     parser.add_argument('--epoch_size', type=int,
-                        help='Number of batches per epoch.', default=900)
+                        help='Number of batches per epoch.', default=500)
     parser.add_argument('--alpha', type=float,
                         help='Positive to negative triplet distance margin.', default=0.2)
     parser.add_argument('--embedding_size', type=int,
