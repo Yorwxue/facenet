@@ -70,7 +70,7 @@ def main(args):
         image_paths_placeholder = tf.placeholder(tf.string, shape=(None, 3), name='image_paths')
         labels_placeholder = tf.placeholder(tf.int64, shape=(None, 3), name='labels')
 
-        input_queue = data_flow_ops.FIFOQueue(capacity=100000,
+        input_queue = data_flow_ops.FIFOQueue(capacity=50000,
                                               dtypes=[tf.string, tf.int64],
                                               shapes=[(3,), (3,)],
                                               shared_name=None, name=None)
