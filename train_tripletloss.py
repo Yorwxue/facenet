@@ -418,15 +418,15 @@ def parse_arguments(argv):
     parser.add_argument('--max_nrof_epochs', type=int,
                         help='Number of epochs to run.', default=100)
     parser.add_argument('--batch_size', type=int,
-                        help='Number of images to process in a batch.', default=54)
+                        help='Number of images to process in a batch.', default=36)
     parser.add_argument('--image_size', type=int,
                         help='Image size (height, width) in pixels.', default=160)
     parser.add_argument('--people_per_batch', type=int,
-                        help='Number of people per batch.', default=27)
+                        help='Number of people per batch.', default=18)
     parser.add_argument('--images_per_person', type=int,
-                        help='Number of images per person.', default=24)
+                        help='Number of images per person.', default=16)
     parser.add_argument('--epoch_size', type=int,
-                        help='Number of batches per epoch.', default=600)
+                        help='Number of batches per epoch.', default=400)
 
     parser.add_argument('--alpha', type=float,
                         help='Positive to negative triplet distance margin.', default=0.2)
