@@ -15,6 +15,7 @@ import facenet
 
 
 def main(args):
+    del_count = 0
     subdir = datetime.strftime(datetime.now(), '%Y%m%d-%H%M%S')
     log_dir = os.path.expanduser(args.logs_base_dir)
     print('log dir: %s' % log_dir)
@@ -33,7 +34,9 @@ def main(args):
         try:
             misc.imread(path)
         except:
+            del_count += 1
             print(path)
+            os.remove(path)
             with open(log_file, 'a') as fw:
                     fw.write('%s\n' % path)
 
@@ -41,6 +44,10 @@ def main(args):
         t[i] = duration
         if i % 1000 == 0 or i == len(paths)-1:
             print('File %d/%d  Total time: %.2f  Avg: %.3f  Std: %.3f' % (i, len(paths), time.time()-x, np.mean(t[0:i])*1000, np.std(t[0:i])*1000))
+
+    print('totally %d illegal images' % del_count)
+    with open(log_file, 'a') as fw:
+        fw.write('totally %d illegal images' % del_count)
 
 
 def parse_arguments(argv):
