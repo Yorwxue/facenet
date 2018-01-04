@@ -405,13 +405,13 @@ def parse_arguments(argv):
     parser.add_argument('--gpu_memory_fraction', type=float,
                         help='Upper bound on the amount of GPU memory that will be used by the process.', default=1.0)
     parser.add_argument('--pretrained_model', type=str,
-                        help='Load a pretrained model before training starts.', default='~/models/pre_trained/20170512-110547.pb')
+                        help='Load a pretrained model before training starts.')
     parser.add_argument('--data_dir', type=str,
                         help='Path to the data directory containing aligned face patches. Multiple directories are separated with colon.',
-                        default='~/datasets/face_recognition_dataset/lfw_mtcnnpy_160')
+                        default='/home/csist/clliao/dataset/face_recognition_dataset/MsCelebV1/align')
     parser.add_argument('--model_def', type=str,
                         help='Model definition. Points to a module containing the definition of the inference graph.',
-                        default='models.inception_resnet_v1')
+                        default='models.inception_resnet_v2')
     parser.add_argument('--max_nrof_epochs', type=int,
                         help='Number of epochs to run.', default=500)
     parser.add_argument('--batch_size', type=int,
@@ -462,14 +462,14 @@ def parse_arguments(argv):
                         help='The file extension for the LFW dataset.', default='png', choices=['jpg', 'png'])
     parser.add_argument('--lfw_dir', type=str,
                         help='Path to the data directory containing aligned face patches.',
-                        default='~/datasets/lfw/lfw_realigned/')
+                        default='/home/csist/clliao/dataset/face_recognition_dataset/lfw/lfw_mtcnnpy_160')
     parser.add_argument('--lfw_nrof_folds', type=int,
                         help='Number of folds to use for cross validation. Mainly used for testing.', default=10)
 
     # Setting of performance
     parser.add_argument('--num_of_threads', type=int,
                         help='Depend on performance of computer.',
-                        default=4)
+                        default=16)
     return parser.parse_args(argv)
 
 
