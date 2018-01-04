@@ -410,7 +410,7 @@ def parse_arguments(argv):
                         help='Load a pretrained model before training starts.')
     parser.add_argument('--data_dir', type=str,
                         help='Path to the data directory containing aligned face patches. Multiple directories are separated with colon.',
-                        default='/home/csist/clliao/dataset/face_recognition_dataset/lfw/lfw_mtcnnpy_160')  # '/home/csist/clliao/dataset/face_recognition_dataset/MsCelebV1/align'
+                        default='/home/csist/clliao/dataset/face_recognition_dataset/MsCelebV1/align')
     parser.add_argument('--model_def', type=str,
                         help='Model definition. Points to a module containing the definition of the inference graph.',
                         default='models.inception_resnet_v2')
