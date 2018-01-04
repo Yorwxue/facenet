@@ -1,11 +1,16 @@
+# the program used for checking the readable of images in data set
+# run dataset_read_speed.py:
+# export PYTHONPATH=<path/to/your/facenet.py>
+# python dataset_read_speed.py <path/to/your/dataset>
+
 import facenet
 import argparse
 import sys
 import time
 import numpy as np
 
-def main(args):
 
+def main(args):
     dataset = facenet.get_dataset(args.dir)
     paths, _ = facenet.get_image_paths_and_labels(dataset)
     t = np.zeros((len(paths)))
