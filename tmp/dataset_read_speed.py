@@ -8,7 +8,7 @@ import argparse
 import sys
 import time
 import numpy as np
-
+from scipy import misc
 
 def main(args):
     dataset = facenet.get_dataset(args.dir)
@@ -17,17 +17,21 @@ def main(args):
     x = time.time()
     for i, path in enumerate(paths):
         start_time = time.time()
-        with open(path, mode='rb') as f:
-            _ = f.read()
+        # with open(path, mode='rb') as f:
+        #     _ = f.read()
+        try:
+            img = misc.imread(path)
+        except:
+            print(path)
         duration = time.time() - start_time
         t[i] = duration
-        if i % 1000 == 0 or i==len(paths)-1:
+        if i % 1000 == 0 or i == len(paths)-1:
             print('File %d/%d  Total time: %.2f  Avg: %.3f  Std: %.3f' % (i, len(paths), time.time()-x, np.mean(t[0:i])*1000, np.std(t[0:i])*1000))
 
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('dir', type=str, 
+    parser.add_argument('dir', type=str,
         help='Directory with dataset to test')
     return parser.parse_args(argv)
 
