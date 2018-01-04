@@ -410,15 +410,15 @@ def parse_arguments(argv):
                         help='Load a pretrained model before training starts.')
     parser.add_argument('--data_dir', type=str,
                         help='Path to the data directory containing aligned face patches. Multiple directories are separated with colon.',
-                        default='/home/csist/clliao/dataset/face_recognition_dataset/MsCelebV1/align')
+                        default='/home/csist/clliao/dataset/face_recognition_dataset/lfw/lfw_mtcnnpy_160')  # '/home/csist/clliao/dataset/face_recognition_dataset/MsCelebV1/align'
     parser.add_argument('--model_def', type=str,
                         help='Model definition. Points to a module containing the definition of the inference graph.',
                         default='models.inception_resnet_v2')
 
     parser.add_argument('--max_nrof_epochs', type=int,
-                        help='Number of epochs to run.', default=250)
+                        help='Number of epochs to run.', default=500)
     parser.add_argument('--batch_size', type=int,
-                        help='Number of images to process in a batch.', default=60)
+                        help='Number of images to process in a batch.', default=90)
     parser.add_argument('--image_size', type=int,
                         help='Image size (height, width) in pixels.', default=160)
     parser.add_argument('--people_per_batch', type=int,
@@ -426,7 +426,7 @@ def parse_arguments(argv):
     parser.add_argument('--images_per_person', type=int,
                         help='Number of images per person.', default=40)
     parser.add_argument('--epoch_size', type=int,
-                        help='Number of batches per epoch.', default=500)
+                        help='Number of batches per epoch.', default=1000)
 
     parser.add_argument('--alpha', type=float,
                         help='Positive to negative triplet distance margin.', default=0.2)
