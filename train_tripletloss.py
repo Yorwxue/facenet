@@ -401,9 +401,9 @@ def parse_arguments(argv):
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--logs_base_dir', type=str,
-                        help='Directory where to write event logs.', default='~/logs/pre_trained')
+                        help='Directory where to write event logs.', default='./logs/pre_trained')
     parser.add_argument('--models_base_dir', type=str,
-                        help='Directory where to write trained models and checkpoints.', default='~/models/pre_trained')
+                        help='Directory where to write trained models and checkpoints.', default='./models/pre_trained')
     parser.add_argument('--gpu_memory_fraction', type=float,
                         help='Upper bound on the amount of GPU memory that will be used by the process.', default=1.0)
     parser.add_argument('--pretrained_model', type=str,
@@ -416,7 +416,7 @@ def parse_arguments(argv):
                         default='models.inception_resnet_v2')
 
     parser.add_argument('--max_nrof_epochs', type=int,
-                        help='Number of epochs to run.', default=500)
+                        help='Number of epochs to run.', default=250)
     parser.add_argument('--batch_size', type=int,
                         help='Number of images to process in a batch.', default=60)
     parser.add_argument('--image_size', type=int,
@@ -426,7 +426,7 @@ def parse_arguments(argv):
     parser.add_argument('--images_per_person', type=int,
                         help='Number of images per person.', default=40)
     parser.add_argument('--epoch_size', type=int,
-                        help='Number of batches per epoch.', default=1000)
+                        help='Number of batches per epoch.', default=500)
 
     parser.add_argument('--alpha', type=float,
                         help='Positive to negative triplet distance margin.', default=0.2)
