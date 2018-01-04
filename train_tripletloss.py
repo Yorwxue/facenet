@@ -43,6 +43,7 @@ def main(args):
     np.random.seed(seed=args.seed)
     train_set = facenet.get_dataset(args.data_dir)
 
+    print('data directory: %s' % args.data_dir)
     print('Model directory: %s' % model_dir)
     print('Log directory: %s' % log_dir)
     if args.pretrained_model:
@@ -413,10 +414,11 @@ def parse_arguments(argv):
     parser.add_argument('--model_def', type=str,
                         help='Model definition. Points to a module containing the definition of the inference graph.',
                         default='models.inception_resnet_v2')
+
     parser.add_argument('--max_nrof_epochs', type=int,
                         help='Number of epochs to run.', default=500)
     parser.add_argument('--batch_size', type=int,
-                        help='Number of images to process in a batch.', default=90)
+                        help='Number of images to process in a batch.', default=60)
     parser.add_argument('--image_size', type=int,
                         help='Image size (height, width) in pixels.', default=160)
     parser.add_argument('--people_per_batch', type=int,
@@ -424,7 +426,8 @@ def parse_arguments(argv):
     parser.add_argument('--images_per_person', type=int,
                         help='Number of images per person.', default=40)
     parser.add_argument('--epoch_size', type=int,
-                        help='Number of batches per epoch.', default=500)
+                        help='Number of batches per epoch.', default=1000)
+
     parser.add_argument('--alpha', type=float,
                         help='Positive to negative triplet distance margin.', default=0.2)
     parser.add_argument('--embedding_size', type=int,
