@@ -470,7 +470,7 @@ def parse_arguments(argv):
     # Setting of performance
     parser.add_argument('--num_of_threads', type=int,
                         help='Depend on performance of computer.',
-                        default=16)
+                        default=4)
     return parser.parse_args(argv)
 
 
