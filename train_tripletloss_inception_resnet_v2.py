@@ -3,7 +3,7 @@ FaceNet: A Unified Embedding for Face Recognition and Clustering: http://arxiv.o
 
 RUN train_tripletloss.py. 
 
-python3.6 train_tripletloss_inception_resnet_v2.py --logs_base_dir ~/logs/facenet/ --models_base_dir ~/models/facenet/ --data_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --image_size 160 --model_def models.inception_resnet_v2 --lfw_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --optimizer RMSPROP --learning_rate 0.01 --weight_decay 1e-4 --max_nrof_epochs 500
+python3.6 train_tripletloss_inception_resnet_v2.py --logs_base_dir ./logs/facenet/ --models_base_dir ./models/facenet/ --data_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --image_size 160 --model_def models.inception_resnet_v2 --lfw_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --optimizer RMSPROP --learning_rate 0.01 --weight_decay 1e-4 --max_nrof_epochs 500
 
 """
 
