@@ -3,7 +3,7 @@ FaceNet: A Unified Embedding for Face Recognition and Clustering: http://arxiv.o
 
 RUN train_tripletloss.py. 
 
-python3.6 train_tripletloss.py --logs_base_dir ~/logs/facenet/ --models_base_dir ~/models/facenet/ --data_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --image_size 160 --model_def models.inception_resnet_v2 --lfw_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --optimizer RMSPROP --learning_rate 0.01 --weight_decay 1e-4 --max_nrof_epochs 500
+python3.6 train_tripletloss_inception_resnet_v2.py --logs_base_dir ~/logs/facenet/ --models_base_dir ~/models/facenet/ --data_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --image_size 160 --model_def models.inception_resnet_v2 --lfw_dir /media/clliao/9c88dfb2-c12d-48cc-b30b-eaffb0cbf545/face_recognition_dataset/LFW/lfw_mtcnnpy_160 --optimizer RMSPROP --learning_rate 0.01 --weight_decay 1e-4 --max_nrof_epochs 500
 
 """
 
@@ -138,7 +138,9 @@ def main(args):
                                  learning_rate, args.moving_average_decay, tf.global_variables())
 
         # Create a saver
-        saver = tf.train.Saver(tf.trainable_variables(), max_to_keep=3)
+        # saver = tf.train.Saver(tf.trainable_variables(), max_to_keep=3)
+        variables_to_restore = slim.get_variables_to_restore()
+        saver = tf.train.Saver(variables_to_restore)
 
         # Build the summary operation based on the TF collection of Summaries.
         summary_op = tf.summary.merge_all()
@@ -174,7 +176,9 @@ def main(args):
                       args.embedding_size, anchor, positive, negative, triplet_loss)
 
                 # Save variables and the metagraph if it doesn't exist already
-                save_variables_and_metagraph(sess, saver, summary_writer, model_dir, subdir, step)
+                # save_variables_and_metagraph(sess, saver, summary_writer, model_dir, subdir, step)
+                saver.save(sess, os.path.join(model_dir, 'model.ckpt'))
+                print("Model saved in path: %s" % model_dir)
 
                 # Evaluate on LFW
                 if args.lfw_dir:

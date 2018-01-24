@@ -92,7 +92,7 @@ def face_detection(image_filename):
             query_face_locations = face_locations
 
             query_processed_face_ = facenet.face_process(query_face_closeup, False, False, args_image_size)
-            # query_face_vector = facenet.get_face_vec(query_processed_face_)
+            # query_face_vector = inception_resnet_v2_facenet.get_face_vec(query_processed_face_)
 
             print('Calculating features for images')
             feed_dict = {images_placeholder: query_processed_face_, phase_train_placeholder: False}
